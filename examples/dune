@@ -1,0 +1,8 @@
+(executable
+    (public_name HelloWorld)
+    (name HelloWorld)
+    (libraries Revenge Revery))
+
+(alias
+    (name all)
+    (deps (glob_files *.exe)))
