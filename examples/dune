@@ -2,7 +2,7 @@
     (public_name HelloWorld)
     (name HelloWorld)
     (package Examples)
-    (libraries Revenge Revery))
+    (libraries reglm Revenge Revery))
 
 (alias
     (name all)

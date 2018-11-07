@@ -20,6 +20,15 @@ let defaultOptions: options = {
 
 let getElapsedTime = (_game: t('a)) => 0.;
 
+let getDimensions = (game) => {
+    Window.getSize(game.window);
+};
+
+let getAspectRatio = (game) => {
+    let d = getDimensions(game);
+    float_of_int(d.width) /. float_of_int(d.height);
+};
+
 let start = (~update, ~render, ~options=defaultOptions, initialState) => {
     let init = app => {
         let _update = update;

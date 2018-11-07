@@ -5,10 +5,16 @@ type t = {
     projectionMatrix: Mat4.t
 };
 
-let perspective = () => {
+let perspective = (~fov=0.785, ~aspectRatio=1.0, ~near=0.1, ~far=100., position, target, up) => {
+    let view = Mat4.create();
+    let projection = Mat4.create();
+
+    Mat4.lookAt(view, position, target, up);
+    Mat4.perspective(projection, fov, aspectRatio, near, far);
+
     let ret: t = {
-        viewMatrix: Mat4.create(),
-        projectionMatrix: Mat4.create(),
+        viewMatrix: view,
+        projectionMatrix: projection,
     };
     ret;
 };

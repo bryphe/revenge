@@ -1,4 +1,4 @@
 (library
     (name Revenge_Graphics)
     (public_name Revenge_Graphics)
-    (libraries Revery Reglm))
+    (libraries Revery reglm))
