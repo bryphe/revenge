@@ -14,9 +14,13 @@ type options = {
     title: string
 };
 
+let defaultOptions: options = {
+    title: "My Game"
+};
+
 let getElapsedTime = (_game: t('a)) => 0.;
 
-let start = (~update, ~render, ~options, initialState) => {
+let start = (~update, ~render, ~options=defaultOptions, initialState) => {
     let init = app => {
         let _update = update;
         let _render = render;

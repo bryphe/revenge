@@ -23,6 +23,4 @@ let update = (game, _state) => {
     Game.getElapsedTime(game);
 };
 
-Game.start(~render, ~update, ~options={
-    title: "My Game"
-}, initialState);
+Game.start(~render, ~update, initialState);
