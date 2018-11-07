@@ -2,10 +2,7 @@ open Revenge;
 
 let scene = Revenge.Scene.create();
 
-let init = _game => {
-  let initialState = 0.;
-  initialState
-};
+let initialState = 0.;
 
 let render = (_game, _state) => {
     let camera = Graphics.Camera.perspective();
@@ -26,6 +23,6 @@ let update = (game, _state) => {
     Game.getElapsedTime(game);
 };
 
-Game.start(~init, ~render, ~update, {
+Game.start(~render, ~update, ~options={
     title: "My Game"
-});
+}, initialState);

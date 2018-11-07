@@ -1,13 +1,12 @@
 type t('a);
 
-type initFunction('a) = t('a) => 'a;
 type renderFunction('a) = (t('a), 'a) => unit;
 type updateFunction('a) = (t('a), 'a) => 'a;
 
-type startOptions = {
+type options = {
     title: string
 };
 
 let getElapsedTime: t('a) => float;
 
-let start: (~init: initFunction('a), ~update: updateFunction('a), ~render: renderFunction('a), startOptions) => unit;
+let start: (~update: updateFunction('a), ~render: renderFunction('a), ~options: options, 'a) => unit;
