@@ -11,7 +11,8 @@
     "ocaml": "~4.6.0",
     "@opam/ocamlbuild": "*",
     "revery": "*",
-    "flex": "*"
+    "flex": "*",
+    "reason-gl-matrix": "*"
   },
   "resolutions": {
     "revery": "github:bryphe/revery#1d80217",
