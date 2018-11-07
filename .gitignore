@@ -62,5 +62,6 @@ typings/
 
 *.install
 .merlin
+**/.merlin
 _build/
 _esy/

@@ -1,4 +1,4 @@
 (library
     (name Revenge)
     (public_name Revenge)
-    (libraries Revery))
+    (libraries Revenge_Graphics))

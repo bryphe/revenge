@@ -4,7 +4,7 @@
   "description": "Revery quickstart",
   "license": "MIT",
   "esy": {
-    "build": "refmterr dune build -p App",
+    "build": "refmterr dune build --root . -j4",
     "buildsInSource": "_build"
   },
   "dependencies": {

@@ -1,6 +1,6 @@
 open Revenge;
 
-let scene = Graphics.Scene3d.create();
+let scene = Revenge.Scene.create();
 
 let init = game => {
   let initialState = 0.;
@@ -10,7 +10,7 @@ let init = game => {
 let render = (game, state) => {
     let camera = Graphics.Camera.perspective();
 
-    Graphics.Scene3d.render(scene, camera, () => {
+    Graphics.Scene.render(scene, camera, () => {
         <group>
             <ambientLight />
             <plane />

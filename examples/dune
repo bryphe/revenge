@@ -1,6 +1,7 @@
 (executable
     (public_name HelloWorld)
     (name HelloWorld)
+    (package Examples)
     (libraries Revenge Revery))
 
 (alias

@@ -6,4 +6,4 @@ type updateFunction('a) = (t('a), 'a) => 'a;
 
 let getElapsedTime: t('a) => float;
 
-let start: (~name: string, ~init: initFunction('a), ~update: updateFunction('a), ~render: renderFunction('a), unit) => unit;
+let start: (~name: string, ~_init: initFunction('a), ~_update: updateFunction('a), ~_render: renderFunction('a), unit) => unit;
