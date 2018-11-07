@@ -1,2 +1,2 @@
 # revenge
-3D Game / Rendering Engine built with Revery + Reasonml
+## 3D Rendering Engine built with Revery + Reasonml
