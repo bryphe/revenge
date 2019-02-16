@@ -8,6 +8,7 @@ open Revenge;
 let init = app => {
 
   Scene.test();
+  Scene.React3d.test();
 
   /* Create a window! */
   let _ = App.createWindow(app, "test");
