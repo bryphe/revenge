@@ -1,4 +1,5 @@
 type innerDrawable =
+  | SceneRoot
   | Camera(Camera.t);
 
 type t = {
