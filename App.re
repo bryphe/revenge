@@ -1,13 +1,13 @@
 open Revery;
-open Revery.Core;
-open Revery.UI;
+/* open Revery.Core; */
+/* open Revery.UI; */
 
 open Revenge;
 
 /* The 'main' function for our app */
 let init = app => {
 
-  Revenge.Scene.test();
+  Scene.test();
 
   /* Create a window! */
   let _ = App.createWindow(app, "test");
