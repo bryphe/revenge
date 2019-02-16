@@ -1,31 +1,25 @@
 {
-  "name": "revery-quick-start",
+  "name": "Revenge",
   "version": "1.1.0",
-  "description": "Revery quickstart",
+  "description": "Revenge 3D Engine",
   "license": "MIT",
   "esy": {
     "build": "refmterr dune build -p App",
     "buildsInSource": "_build"
   },
   "dependencies": {
-    "ocaml": "~4.6.0",
-    "@opam/ocamlbuild": "*",
-    "revery": "*",
-    "flex": "*"
+    "ocaml": "~4.7.0",
+    "revery": "0.7.0"
   },
   "resolutions": {
-    "revery": "github:bryphe/revery#1d80217",
-    "flex": "github:bryphe/flex#a73c134",
-    "reason-reactify": "github:bryphe/reason-reactify#fce2e20",
-    "reason-fontkit": "github:bryphe/reason-fontkit#9e4358e",
-    "reason-glfw": "github:bryphe/reason-glfw#34bee3d",
-    "reason-gl-matrix": "github:bryphe/reason-gl-matrix#20ba66e",
-    "esy-cmake": "github:esy-packages/esy-cmake#37a86af",
-    "esy-freetype2": "github:bryphe/esy-freetype2#bdce79aa3",
-    "esy-harfbuzz": "github:bryphe/esy-harfbuzz#b9fcbe3"
+    "@opam/cmdliner": "1.0.2",
+    "@opam/js_of_ocaml": "github:ocsigen/js_of_ocaml:js_of_ocaml.opam#db257ce",
+    "@opam/js_of_ocaml-compiler": "github:ocsigen/js_of_ocaml:js_of_ocaml-compiler.opam#db257ce",
+    "@brisk/brisk-reconciler": "github:briskml/brisk-reconciler#daa00be",
+    "rebez": "github:jchavarri/rebez#46cbc183"
   },
   "devDependencies": {
-    "ocaml": "~4.6.0",
+    "ocaml": "~4.7.0",
     "@opam/merlin": "*",
     "@opam/dune": "*"
   }
