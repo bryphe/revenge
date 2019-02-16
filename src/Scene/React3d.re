@@ -1,1 +1,1 @@
-let test = () => print_endline("React3d");
+include Brisk_reconciler.Make(Reconciler);
