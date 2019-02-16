@@ -20,7 +20,7 @@ let draw: (t, React.syntheticElement) => t =
          switch(state) {
           | None => 
             let updates = React3d.RenderedElement.render(node, element);
-            let newNode = React3d.REnderedElement.executeHostViewUpdates(updates);
+            let newNode = React3d.RenderedElement.executeHostViewUpdates(updates);
             let newRendered = updates |> React3d.RenderedElement.executePendingEffects;
             (newNode, newRendered)
          | Some(s) =>
