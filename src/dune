@@ -1,0 +1,4 @@
+(library
+    (name Revenge)
+    (public_name Revenge)
+    (libraries Revenge_Scene Revery))

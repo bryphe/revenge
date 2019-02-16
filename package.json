@@ -4,8 +4,12 @@
   "description": "Revenge 3D Engine",
   "license": "MIT",
   "esy": {
-    "build": "refmterr dune build -p App",
-    "buildsInSource": "_build"
+    "build": "refmterr dune build --root . -j4",
+    "buildsInSource": "_build",
+    "install": [
+      "esy-installer Revery_Scene.install",
+      "esy-installer Revenge.install"
+    ]
   },
   "dependencies": {
     "ocaml": "~4.7.0",
