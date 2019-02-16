@@ -1,4 +1,3 @@
-
 type state = {
     rendered: React3d.RenderedElement.t,
     previousElement: React3d.syntheticElement
@@ -10,11 +9,11 @@ type t = {
 };
 
 let create = () => {
-    node: Drawawble.create(SceneRoot),
+    node: Drawable.create(SceneRoot),
     state: None,
 };
 
-let draw: (t, React.syntheticElement) => t =
+let draw: (t, React3d.syntheticElement) => t =
     ({node, state}, element) => {
      let (newNode, newRendered) =
          switch(state) {
@@ -24,7 +23,21 @@ let draw: (t, React.syntheticElement) => t =
             let newRendered = updates |> React3d.RenderedElement.executePendingEffects;
             (newNode, newRendered)
          | Some(s) =>
-            let nextElement = React3d.RenderedElement.update(~previousElement=s.previousElement, ~renderedElement=s.rendered, element);
+            let nextElement = 
+                React3d.RenderedElement.update(~previousElement=s.previousElement, ~renderedElement=s.rendered, element) |> React3d.RenderedElement.flushPendingUpdates;
+
+            let newNode = React3d.RenderedElement.executeHostViewUpdates(nextElement);
+
+            let newRendered = nextElement |> React3d.RenderedElement.executePendingEffects;
+            (newNode, newRendered)
             /* TODO: Finish up rendering logic here, and test out drawing! */
-         }
+         };
+
+     Renderer.draw(newNode);
+
+     let ret: t = {
+        node: newNode,
+        state: Some({rendered: newRendered, previousElement: element}),
+     }
+     ret;
     };
