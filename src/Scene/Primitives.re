@@ -1,4 +1,4 @@
-module Scene = {
+module Camera = {
   let component = React3d.nativeComponent("scene");
 
   let make = (~camera: Camera.t, children) =>
