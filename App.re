@@ -22,11 +22,12 @@ let init = app => {
     projection: Mat4.create(),
   }
 
-  let _geometry = Revenge.Geometry.Cube.create();
+  let geometry = Revenge.Geometry.Cube.create();
+  let material = Revenge.Scene.Material.create();
 
   let _ = Scene.draw(s, <Camera camera>
-                     <Camera camera />
-                     <Camera camera />
+                        <Mesh geometry material />
+                        <Mesh geometry material />
                      </Camera>)
 
   /* Create a UI 'container' */
