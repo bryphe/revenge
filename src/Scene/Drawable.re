@@ -1,6 +1,7 @@
 type innerDrawable =
   | SceneRoot
-  | Camera(Camera.t);
+  | Camera(Camera.t)
+  | Mesh(Geometry.t, Material.t);
 
 type t = {
 id: int,

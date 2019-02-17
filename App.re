@@ -22,6 +22,8 @@ let init = app => {
     projection: Mat4.create(),
   }
 
+  let _geometry = Revenge.Geometry.Cube.create();
+
   let _ = Scene.draw(s, <Camera camera>
                      <Camera camera />
                      <Camera camera />
