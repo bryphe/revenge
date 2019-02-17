@@ -5,6 +5,7 @@ let rec draw = (drawable: Drawable.t) => {
     | SceneRoot => ()
     | Camera(_) => prerr_endline("Camera!")
     | Mesh(_) => prerr_endline("Mesh!")
+    | AmbientLight(_) => prerr_endline("AmbientLight")
     }
 
     List.iter(draw, drawable.children);

@@ -1,5 +1,7 @@
+open Revery.Core;
+
 module Camera = {
-  let component = React3d.nativeComponent("camera");
+  let component = React3d.nativeComponent("Camera");
 
   let make = (~camera: Camera.t, children) =>
     component(hooks =>
@@ -21,7 +23,7 @@ module Camera = {
 };
 
 module Mesh = {
-  let component = React3d.nativeComponent("mesh");
+  let component = React3d.nativeComponent("Mesh");
 
   let make = (~geometry: Geometry.t, ~material: Material.t, children) =>
     component(hooks =>
@@ -39,5 +41,27 @@ module Mesh = {
 
   let createElement = (~geometry: Geometry.t, ~material: Material.t, ~children, ()) => {
     make(~geometry, ~material, React3d.listToElement(children));
+  };
+};
+
+module AmbientLight = {
+  let component = React3d.nativeComponent("AmbientLight");
+
+  let make = (~color: Color.t, children) =>
+    component(hooks =>
+      (
+        hooks,
+        {
+          make: () => Drawable.create(AmbientLight(color)),
+          configureInstance: (~isFirstRender as _, node: Drawable.t) => {
+            {...node, inner: AmbientLight(color)};
+          },
+          children,
+        },
+      )
+    );
+
+  let createElement = (~color: Color.t, ~children, ()) => {
+    make(~color, React3d.listToElement(children));
   };
 };

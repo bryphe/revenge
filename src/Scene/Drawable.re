@@ -1,7 +1,10 @@
+open Revery.Core;
+
 type innerDrawable =
   | SceneRoot
   | Camera(Camera.t)
-  | Mesh(Geometry.t, Material.t);
+  | Mesh(Geometry.t, Material.t)
+  | AmbientLight(Color.t);
 
 type t = {
 id: int,

@@ -1,5 +1,5 @@
-open Revery;
-/* open Revery.Core; */
+/* open Revery; */
+open Revery.Core;
 /* open Revery.UI; */
 open Reglm;
 
@@ -26,6 +26,7 @@ let init = app => {
   let material = Revenge.Scene.Material.create();
 
   let _ = Scene.draw(s, <Camera camera>
+                        <AmbientLight color={Colors.yellow} />
                         <Mesh geometry material />
                         <Mesh geometry material />
                      </Camera>)
