@@ -27,7 +27,9 @@ let init = app => {
 
   let _ = Scene.draw(s, <Camera camera>
                         <AmbientLight color={Colors.yellow} />
-                        <Mesh geometry material />
+                        <Transform transform={Mat4.create()} >
+                            <Mesh geometry material />
+                        </Transform>
                         <Mesh geometry material />
                      </Camera>)
 

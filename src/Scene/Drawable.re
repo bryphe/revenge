@@ -1,10 +1,12 @@
+open Reglm;
 open Revery.Core;
 
 type innerDrawable =
   | SceneRoot
   | Camera(Camera.t)
   | Mesh(Geometry.t, Material.t)
-  | AmbientLight(Color.t);
+  | AmbientLight(Color.t)
+  | Transform(Mat4.t);
 
 type t = {
 id: int,

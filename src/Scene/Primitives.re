@@ -1,3 +1,4 @@
+open Reglm;
 open Revery.Core;
 
 module Camera = {
@@ -63,5 +64,27 @@ module AmbientLight = {
 
   let createElement = (~color: Color.t, ~children, ()) => {
     make(~color, React3d.listToElement(children));
+  };
+};
+
+module Transform = {
+  let component = React3d.nativeComponent("Transform");
+
+  let make = (~transform: Mat4.t, children) =>
+    component(hooks =>
+      (
+        hooks,
+        {
+          make: () => Drawable.create(Transform(transform)),
+          configureInstance: (~isFirstRender as _, node: Drawable.t) => {
+            {...node, inner: Transform(transform)};
+          },
+          children,
+        },
+      )
+    );
+
+  let createElement = (~transform: Mat4.t, ~children, ()) => {
+    make(~transform, React3d.listToElement(children));
   };
 };
