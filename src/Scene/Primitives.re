@@ -42,7 +42,8 @@ module Mesh = {
       )
     );
 
-  let createElement = (~geometry: Geometry.t, ~material: Material.t, ~children, ()) => {
+  let createElement =
+      (~geometry: Geometry.t, ~material: Material.t, ~children, ()) => {
     make(~geometry, ~material, React3d.listToElement(children));
   };
 };
