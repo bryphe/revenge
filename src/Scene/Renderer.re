@@ -71,5 +71,5 @@ let draw: (Drawable.t, Camera.t) => unit =
 
     List.iter(renderMesh(pass), meshes);
 
-    print_endline("Meshes: " ++ string_of_int(List.length(meshes)));
+    /* print_endline("Meshes: " ++ string_of_int(List.length(meshes))); */
   };

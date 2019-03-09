@@ -25,12 +25,14 @@ let varying: list(ShaderVarying.t) = [
 ];
 
 let vsShader = {|
-   gl_Position = uProjection * uView * uWorld * aPosition;
+   gl_Position = uProjection * uView * uWorld * vec4(aPosition.xyz, 1.0);
    vTexCoord = aTexCoord;
 |};
 
 let fsShader = {|
-    gl_FragColor = texture2D(uSampler, vTexCoord);
+    gl_FragColor = texture2D(uTexture, vTexCoord);
+/* gl_FragColor = vec4(1.0,0.0,0.0,1.0); */
+/* gl_FragColor = vec4(vTexCoord.x, vTexCoord.y, 0.0, 1.0); */
 |};
 
 let _create = () => {

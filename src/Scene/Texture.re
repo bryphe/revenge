@@ -15,6 +15,15 @@ let ofImage = (img: Image.t) => {
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
   let pixels = Image.getPixels(img);
+  let dimensions = Image.getDimensions(img);
+
+print_endline(
+    "- width: "
+    ++ string_of_int(dimensions.width)
+    ++ " - height: "
+    ++ string_of_int(dimensions.height),
+  );
+  
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 
   let ret: t = {
@@ -23,3 +32,7 @@ let ofImage = (img: Image.t) => {
 
   ret;
 }
+
+let bind = (tex: t) => {
+    glBindTexture(GL_TEXTURE_2D, tex.texture);
+};

@@ -4,6 +4,8 @@ open Revery.Math;
 /* open Revery.UI; */
 open Reglfw;
 
+module Gl = Reglfw.Glfw;
+
 open Revenge;
 open Revenge.Scene;
 open Revenge.Scene.Primitives;
@@ -46,13 +48,16 @@ let init = app => {
   let camera: Revenge.Scene.Camera.t = {view, projection};
 
   let geometry = Revenge.Geometry.Cube.create();
-  let material = Revenge.Scene.Material.SolidColor.create();
+
+  Reglfw.Glfw.glfwMakeContextCurrent(w.glfwWindow);
 
   let imgPromise = Image.load(getExecutingDirectory() ++ "UVCheckerMap02-512.png");
   let _ = Lwt.bind(imgPromise, (v) => {
     
 
-      let _texture = Texture.ofImage(v);
+      let texture = Texture.ofImage(v);
+  /* let solidMaterial = Revenge.Scene.Material.SolidColor.create(); */
+  let textureMaterial = Revenge.Scene.Material.BasicTexture.create(texture);
   /* let _ = Scene.draw(s, */
   /*                       <AmbientLight color={Colors.yellow}> */
   /*                       <Transform transform={Mat4.create()} > */
@@ -86,15 +91,22 @@ let init = app => {
       );
 
       /* Reglfw.Glfw.glClearColor(1.0, 0., 0., 0.); */
+      Gl.glClearDepth(1.0);
+
+      Gl.glEnable(GL_DEPTH_TEST);
+      /* Gl.glEnable(GL_BLEND); */
+
+      /* Gl.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); */
+      Gl.glDepthFunc(GL_LEQUAL);
 
       let _ =
         Scene.draw(
           s,
           <AmbientLight color=Colors.yellow>
             <Transform transform=someTransform>
-              <Mesh geometry material />
+              <Mesh geometry material=textureMaterial />
             </Transform>
-            <Mesh geometry material />
+            <Mesh geometry material=textureMaterial />
           </AmbientLight>,
           camera,
         );

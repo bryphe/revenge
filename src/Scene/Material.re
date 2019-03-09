@@ -37,7 +37,7 @@ module SolidColor = {
             Color.toVec4(pass.color),
           );
 
-          print_endline("SolidColor: drawing!");
+          /* print_endline("SolidColor: drawing!"); */
           Geometry.draw(geometry, shader);
         /* | _ => (); */
         };
@@ -48,3 +48,41 @@ module SolidColor = {
       ret;
     };
 };
+
+module BasicTexture = {
+    let create: Texture.t => t = (texture) => {
+        
+      let draw =
+          (renderPass: RenderPass.t, geometry: Geometry.t, transform: Mat4.t) => {
+        switch (renderPass) {
+        | AmbientLight(pass) =>
+          let shader = Revenge_Shaders.BasicTextureShader.create();
+
+          CompiledShader.use(shader);
+          CompiledShader.setUniformMatrix4fv(shader, "uWorld", transform);
+
+          CompiledShader.setUniformMatrix4fv(
+            shader,
+            "uView",
+            pass.camera.view,
+          );
+
+          CompiledShader.setUniformMatrix4fv(
+            shader,
+            "uProjection",
+            pass.camera.projection,
+          );
+          Texture.bind(texture);
+
+
+          /* print_endline("Texture: drawing!"); */
+          Geometry.draw(geometry, shader);
+        /* | _ => (); */
+        };
+      };
+
+      let ret = {draw: draw};
+
+      ret;
+    };
+}
