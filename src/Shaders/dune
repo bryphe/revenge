@@ -1,0 +1,4 @@
+(library
+    (name Revenge_Shader)
+    (public_name Revenge_Shaders)
+    (libraries reglfw Revery))
