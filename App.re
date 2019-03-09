@@ -16,6 +16,9 @@ let init = app => {
   /* Create a window! */
   let w = App.createWindow(app, "test");
 
+  let size = Window.getSize(w);
+  let aspectRatio = float_of_int(size.width) /. float_of_int(size.height);
+
   let view = Mat4.create();
   let projection = Mat4.create();
 
@@ -24,7 +27,7 @@ let init = app => {
               Vec3.create(0., 0., 0.),
               Vec3.create(0., 1., 0.));
 
-  Mat4.perspective(projection, 1.5708, 1.0, 0.1, 100.);
+  Mat4.perspective(projection, 1.5708, aspectRatio, 0.1, 100.);
 
   let camera: Revenge.Scene.Camera.t = {
     view: view,
