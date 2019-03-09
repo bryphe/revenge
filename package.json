@@ -10,6 +10,7 @@
       "esy-installer App.install",
       "esy-installer Revenge_Geometry.install",
       "esy-installer Revenge_Scene.install",
+      "esy-installer Revenge_Shaders.install",
       "esy-installer Revenge.install"
     ]
   },

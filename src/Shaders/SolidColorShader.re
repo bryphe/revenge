@@ -3,9 +3,7 @@
 open Revery.Shaders;
 open Revery.Shaders.Shader;
 
-type t = {
-    shader: CompiledShader.t,
-};
+type t = CompiledShader.t;
 
 let attribute: list(ShaderAttribute.t) = [
   {dataType: ShaderDataType.Vector4, name: "aPosition", channel: Position},
@@ -47,9 +45,4 @@ let _create = () => {
   Shader.compile(shader);
 };
 
-let create = () => {
-    let ret: t = {
-        shader: _create(),
-    };
-    ret;
-};
+let create = () => _create();

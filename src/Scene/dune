@@ -1,4 +1,4 @@
 (library
     (name Revenge_Scene)
     (public_name Revenge_Scene)
-    (libraries reglm brisk-reconciler Revenge_Geometry Revery))
+    (libraries reglm brisk-reconciler Revenge_Geometry Revenge_Shaders Revery))
