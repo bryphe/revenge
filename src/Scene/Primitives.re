@@ -1,5 +1,5 @@
-open Reglm;
-open Revery.Core;
+open Revery;
+open Revery.Math;
 
 module Camera = {
   let component = React3d.nativeComponent("Camera");

@@ -1,5 +1,5 @@
-open Reglm;
-open Revery.Core;
+open Revery;
+open Revery.Math;
 
 type innerDrawable =
   | SceneRoot

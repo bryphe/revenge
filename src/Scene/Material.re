@@ -1,6 +1,6 @@
 
+open Revery;
 open Revery.Math;
-open Revery.Core;
 /* open Revery.Shaders; */
 /* open Revery.Shaders.Shader; */
 

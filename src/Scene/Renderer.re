@@ -1,7 +1,7 @@
 
 open Revery.Math;
 
-module Colors = Revery.Core.Colors;
+module Colors = Revery.Colors;
 
 open Drawable;
 
@@ -14,7 +14,7 @@ Mat4.lookAt(defaultCamera,
 
 module Mesh {
     type t = {
-        geometry: Revery.Geometry.Geometry.t,
+        geometry: Revery.Geometry.t,
         material: Material.t,
         transform: Mat4.t,
     }

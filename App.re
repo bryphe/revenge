@@ -1,7 +1,7 @@
 /* open Revery; */
-open Revery.Core;
+open Revery;
+open Revery.Math;
 /* open Revery.UI; */
-open Reglm;
 
 open Revenge;
 /* open Revenge.Scene; */
