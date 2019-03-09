@@ -1,3 +1,4 @@
 (install
+    (package App)
     (section bin)
-    (files favicon01.png UVCheckerMap02-512.png))
+    (files favicon.png UVCheckerMap02-512.png))
