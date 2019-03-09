@@ -1,4 +1,4 @@
-module Color = Revery.Core.Color;
+module Color = Revery.Color;
 
 module AmbientLightPass {
     type t = {
