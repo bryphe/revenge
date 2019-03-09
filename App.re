@@ -16,10 +16,19 @@ let init = app => {
   /* Create a window! */
   let w = App.createWindow(app, "test");
 
+  let view = Mat4.create();
+  let projection = Mat4.create();
+
+  Mat4.lookAt(view,
+              Vec3.create(0.0, 0.0, 3.0),
+              Vec3.create(0., 0., 0.),
+              Vec3.create(0., 1., 0.));
+
+  Mat4.perspective(projection, 1.5708, 1.0, 0.1, 100.);
+
   let camera: Revenge.Scene.Camera.t = {
-    position: Vec3.create(0., 0., 0.),
-    view: Mat4.create(),
-    projection: Mat4.create(),
+    view: view,
+    projection: projection,
   }
 
   let geometry = Revenge.Geometry.Cube.create();
