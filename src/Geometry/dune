@@ -1,0 +1,4 @@
+(library
+    (name Revenge_Geometry)
+    (public_name Revenge_Geometry)
+    (libraries reglfw Revery))
