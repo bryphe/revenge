@@ -43,12 +43,11 @@ let collectMeshes: (Drawable.t) => list(Mesh.t) = (drawable) => {
     f(drawable);
 };
 
-let draw: (Drawable.t, Camera.t) => unit = (drawable, _camera) => {
+let draw: (Drawable.t, Camera.t) => unit = (drawable, camera) => {
     let meshes = collectMeshes(drawable);
     /* let passes: list(RenderPass.t) = [RenderPass.AmbientColor(Colors.Yellow)]; */
 
-
-    let pass = RenderPass.AmbientLight(Colors.white);
+    let pass = RenderPass.AmbientLight(RenderPass.AmbientLightPass.create(~color=Colors.yellow, ~camera=camera, ()));
 
     let renderMesh = (pass: RenderPass.t, mesh: Mesh.t) => {
        mesh.material.draw(pass, mesh.geometry);

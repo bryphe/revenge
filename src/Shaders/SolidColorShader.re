@@ -31,6 +31,7 @@ let vsShader = {|
 
 let fsShader = {|
     gl_FragColor = vColor;
+    /* gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0); */
 |};
 
 let _create = () => {
