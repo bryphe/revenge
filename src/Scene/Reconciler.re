@@ -8,7 +8,8 @@ let insertNode = (~parent: node, ~child: node, ~position as _) => {
 
 let deleteNode = (~parent: node, ~child: node) => {
   ...parent,
-  children: List.filter((c: Drawable.t) => c.id != child.id, parent.children),
+  children:
+    List.filter((c: Drawable.t) => c.id != child.id, parent.children),
 };
 
 let moveNode = (~parent, ~child as _, ~from as _, ~to_ as _) => {

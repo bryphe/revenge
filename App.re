@@ -9,7 +9,6 @@ open Revenge.Scene.Primitives;
 
 /* The 'main' function for our app */
 let init = app => {
-
   let s = Scene.create();
   /* Scene.React3d.test(); */
 
@@ -22,17 +21,16 @@ let init = app => {
   let view = Mat4.create();
   let projection = Mat4.create();
 
-  Mat4.lookAt(view,
-              Vec3.create(0.0, 0.0, 3.0),
-              Vec3.create(0., 0., 0.),
-              Vec3.create(0., 1., 0.));
+  Mat4.lookAt(
+    view,
+    Vec3.create(0.0, 0.0, 3.0),
+    Vec3.create(0., 0., 0.),
+    Vec3.create(0., 1., 0.),
+  );
 
   Mat4.perspective(projection, 1.5708, aspectRatio, 0.1, 100.);
 
-  let camera: Revenge.Scene.Camera.t = {
-    view: view,
-    projection: projection,
-  }
+  let camera: Revenge.Scene.Camera.t = {view, projection};
 
   let geometry = Revenge.Geometry.Cube.create();
   let material = Revenge.Scene.Material.SolidColor.create();
@@ -54,29 +52,37 @@ let init = app => {
 
   Window.setShouldRenderCallback(w, () => true);
 
-  let someTransform = Mat4.create(); 
+  let someTransform = Mat4.create();
   Mat4.fromTranslation(someTransform, Vec3.create(0., 3., 0.));
 
   /* Set up our render function */
-  Window.setRenderCallback(w, () => {
-
+  Window.setRenderCallback(
+    w,
+    () => {
       let time = Reglfw.Glfw.glfwGetTime();
 
-      let someTransform = Mat4.create(); 
-      Mat4.fromTranslation(someTransform, Vec3.create(0., sin(time) *. 3., 0.));
-
+      let someTransform = Mat4.create();
+      Mat4.fromTranslation(
+        someTransform,
+        Vec3.create(0., sin(time) *. 3., 0.),
+      );
 
       /* Reglfw.Glfw.glClearColor(1.0, 0., 0., 0.); */
 
-      let _ = Scene.draw(s,
-                        <AmbientLight color={Colors.yellow}>
-                        <Transform transform={someTransform} >
-                            <Mesh geometry material />
-                        </Transform>
-                        <Mesh geometry material />
-                        </AmbientLight>,
-                     camera)
-  });
+      let _ =
+        Scene.draw(
+          s,
+          <AmbientLight color=Colors.yellow>
+            <Transform transform=someTransform>
+              <Mesh geometry material />
+            </Transform>
+            <Mesh geometry material />
+          </AmbientLight>,
+          camera,
+        );
+      ();
+    },
+  );
 };
 
 /* Let's get this party started! */
