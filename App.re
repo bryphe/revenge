@@ -10,14 +10,12 @@ open Revenge;
 open Revenge.Scene;
 open Revenge.Scene.Primitives;
 
-
 let isNative =
   switch (Sys.backend_type) {
   | Native => true
   | Bytecode => true
   | _ => false
   };
-
 
 let getExecutingDirectory = () =>
   isNative ? Filename.dirname(Sys.argv[0]) ++ Filename.dir_sep : "";
@@ -51,70 +49,75 @@ let init = app => {
 
   Reglfw.Glfw.glfwMakeContextCurrent(w.glfwWindow);
 
-  let imgPromise = Image.load(getExecutingDirectory() ++ "UVCheckerMap02-512.png");
-  let _ = Lwt.bind(imgPromise, (v) => {
-    
+  let imgPromise =
+    Image.load(getExecutingDirectory() ++ "UVCheckerMap02-512.png");
+  let _ =
+    Lwt.bind(
+      imgPromise,
+      v => {
+        let texture = Texture.ofImage(v);
+        /* let solidMaterial = Revenge.Scene.Material.SolidColor.create(); */
+        let textureMaterial =
+          Revenge.Scene.Material.BasicTexture.create(texture);
+        /* let _ = Scene.draw(s, */
+        /*                       <AmbientLight color={Colors.yellow}> */
+        /*                       <Transform transform={Mat4.create()} > */
+        /*                           <Mesh geometry material /> */
+        /*                       </Transform> */
+        /*                       <Mesh geometry material /> */
+        /*                       </AmbientLight>, */
+        /*                    camera) */
 
-      let texture = Texture.ofImage(v);
-  /* let solidMaterial = Revenge.Scene.Material.SolidColor.create(); */
-  let textureMaterial = Revenge.Scene.Material.BasicTexture.create(texture);
-  /* let _ = Scene.draw(s, */
-  /*                       <AmbientLight color={Colors.yellow}> */
-  /*                       <Transform transform={Mat4.create()} > */
-  /*                           <Mesh geometry material /> */
-  /*                       </Transform> */
-  /*                       <Mesh geometry material /> */
-  /*                       </AmbientLight>, */
-  /*                    camera) */
+        /* Create a UI 'container' */
+        /* let ui = UI.create(w); */
 
-  /* Create a UI 'container' */
-  /* let ui = UI.create(w); */
+        /* Set up some styles */
+        /* let textHeaderStyle = Style.make(~backgroundColor=Colors.black, ~color=Colors.white, ~fontFamily="Lato-Regular.ttf", ~fontSize=24, ()); */
 
-  /* Set up some styles */
-  /* let textHeaderStyle = Style.make(~backgroundColor=Colors.black, ~color=Colors.white, ~fontFamily="Lato-Regular.ttf", ~fontSize=24, ()); */
+        Window.setShouldRenderCallback(w, () => true);
 
-  Window.setShouldRenderCallback(w, () => true);
+        let someTransform = Mat4.create();
+        Mat4.fromTranslation(someTransform, Vec3.create(0., 3., 0.));
 
-  let someTransform = Mat4.create();
-  Mat4.fromTranslation(someTransform, Vec3.create(0., 3., 0.));
+        /* Set up our render function */
+        Window.setRenderCallback(
+          w,
+          () => {
+            let time = Reglfw.Glfw.glfwGetTime();
 
-  /* Set up our render function */
-  Window.setRenderCallback(
-    w,
-    () => {
-      let time = Reglfw.Glfw.glfwGetTime();
+            let someTransform = Mat4.create();
+            Mat4.fromTranslation(
+              someTransform,
+              Vec3.create(0., sin(time) *. 3., 0.),
+            );
 
-      let someTransform = Mat4.create();
-      Mat4.fromTranslation(
-        someTransform,
-        Vec3.create(0., sin(time) *. 3., 0.),
-      );
+            /* Reglfw.Glfw.glClearColor(1.0, 0., 0., 0.); */
+            Gl.glClearDepth(1.0);
 
-      /* Reglfw.Glfw.glClearColor(1.0, 0., 0., 0.); */
-      Gl.glClearDepth(1.0);
+            Gl.glEnable(GL_DEPTH_TEST);
+            /* Gl.glEnable(GL_BLEND); */
 
-      Gl.glEnable(GL_DEPTH_TEST);
-      /* Gl.glEnable(GL_BLEND); */
+            /* Gl.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); */
+            Gl.glDepthFunc(GL_LEQUAL);
 
-      /* Gl.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); */
-      Gl.glDepthFunc(GL_LEQUAL);
-
-      let _ =
-        Scene.draw(
-          s,
-          <AmbientLight color=Colors.yellow>
-            <Transform transform=someTransform>
-              <Mesh geometry material=textureMaterial />
-            </Transform>
-            <Mesh geometry material=textureMaterial />
-          </AmbientLight>,
-          camera,
+            let _ =
+              Scene.draw(
+                s,
+                <AmbientLight color=Colors.yellow>
+                  <Transform transform=someTransform>
+                    <Mesh geometry material=textureMaterial />
+                  </Transform>
+                  <Mesh geometry material=textureMaterial />
+                </AmbientLight>,
+                camera,
+              );
+            ();
+          },
         );
-      ();
-    },
-  );
-  Lwt.return();
-  });
+        Lwt.return();
+      },
+    );
+  ();
 };
 
 /* Let's get this party started! */

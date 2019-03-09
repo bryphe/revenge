@@ -6,14 +6,22 @@ type t = CompiledShader.t;
 
 let attribute: list(ShaderAttribute.t) = [
   {dataType: ShaderDataType.Vector4, name: "aPosition", channel: Position},
-  {dataType: ShaderDataType.Vector2, name: "aTexCoord", channel: TextureCoordinate},
+  {
+    dataType: ShaderDataType.Vector2,
+    name: "aTexCoord",
+    channel: TextureCoordinate,
+  },
 ];
 
 let uniform: list(ShaderUniform.t) = [
   {dataType: ShaderDataType.Mat4, name: "uWorld", usage: VertexShader},
   {dataType: ShaderDataType.Mat4, name: "uView", usage: VertexShader},
   {dataType: ShaderDataType.Mat4, name: "uProjection", usage: VertexShader},
-  {dataType: ShaderDataType.Sampler2D, name: "uTexture", usage: FragmentShader},
+  {
+    dataType: ShaderDataType.Sampler2D,
+    name: "uTexture",
+    usage: FragmentShader,
+  },
 ];
 
 let varying: list(ShaderVarying.t) = [

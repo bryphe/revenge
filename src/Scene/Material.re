@@ -50,8 +50,8 @@ module SolidColor = {
 };
 
 module BasicTexture = {
-    let create: Texture.t => t = (texture) => {
-        
+  let create: Texture.t => t =
+    texture => {
       let draw =
           (renderPass: RenderPass.t, geometry: Geometry.t, transform: Mat4.t) => {
         switch (renderPass) {
@@ -74,7 +74,6 @@ module BasicTexture = {
           );
           Texture.bind(texture);
 
-
           /* print_endline("Texture: drawing!"); */
           Geometry.draw(geometry, shader);
         /* | _ => (); */
@@ -85,4 +84,4 @@ module BasicTexture = {
 
       ret;
     };
-}
+};
