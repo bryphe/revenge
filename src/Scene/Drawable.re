@@ -4,7 +4,7 @@ open Revery.Math;
 type innerDrawable =
   | SceneRoot
   | Camera(Camera.t)
-  | Mesh(Geometry.t, Material.t)
+  | Mesh(Geometry.t, Material.t, Mat4.t)
   | AmbientLight(Color.t)
   | Transform(Mat4.t);
 

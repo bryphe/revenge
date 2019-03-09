@@ -16,6 +16,9 @@ let init = app => {
   /* Create a window! */
   let w = App.createWindow(app, "test");
 
+  let size = Window.getSize(w);
+  let aspectRatio = float_of_int(size.width) /. float_of_int(size.height);
+
   let view = Mat4.create();
   let projection = Mat4.create();
 
@@ -24,7 +27,7 @@ let init = app => {
               Vec3.create(0., 0., 0.),
               Vec3.create(0., 1., 0.));
 
-  Mat4.perspective(projection, 1.5708, 1.0, 0.1, 100.);
+  Mat4.perspective(projection, 1.5708, aspectRatio, 0.1, 100.);
 
   let camera: Revenge.Scene.Camera.t = {
     view: view,
@@ -51,14 +54,23 @@ let init = app => {
 
   Window.setShouldRenderCallback(w, () => true);
 
+  let someTransform = Mat4.create(); 
+  Mat4.fromTranslation(someTransform, Vec3.create(0., 3., 0.));
+
   /* Set up our render function */
   Window.setRenderCallback(w, () => {
+
+      let time = Reglfw.Glfw.glfwGetTime();
+
+      let someTransform = Mat4.create(); 
+      Mat4.fromTranslation(someTransform, Vec3.create(0., sin(time) *. 3., 0.));
+
 
       /* Reglfw.Glfw.glClearColor(1.0, 0., 0., 0.); */
 
       let _ = Scene.draw(s,
                         <AmbientLight color={Colors.yellow}>
-                        <Transform transform={Mat4.create()} >
+                        <Transform transform={someTransform} >
                             <Mesh geometry material />
                         </Transform>
                         <Mesh geometry material />

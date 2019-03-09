@@ -26,14 +26,16 @@ module Camera = {
 module Mesh = {
   let component = React3d.nativeComponent("Mesh");
 
+  let identity = Mat4.create();
+
   let make = (~geometry: Geometry.t, ~material: Material.t, children) =>
     component(hooks =>
       (
         hooks,
         {
-          make: () => Drawable.create(Mesh(geometry, material)),
+          make: () => Drawable.create(Mesh(geometry, material, identity)),
           configureInstance: (~isFirstRender as _, node: Drawable.t) => {
-            {...node, inner: Mesh(geometry, material)};
+            {...node, inner: Mesh(geometry, material, identity)};
           },
           children,
         },
