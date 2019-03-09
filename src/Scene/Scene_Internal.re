@@ -13,8 +13,8 @@ let create = () => {
     state: None,
 };
 
-let draw: (t, React3d.syntheticElement) => t =
-    ({node, state}, element) => {
+let draw: (t, React3d.syntheticElement, Camera.t) => t =
+    ({node, state}, element, camera) => {
      let (newNode, newRendered) =
          switch(state) {
           | None => 
@@ -33,7 +33,7 @@ let draw: (t, React3d.syntheticElement) => t =
             /* TODO: Finish up rendering logic here, and test out drawing! */
          };
 
-     Renderer.draw(newNode);
+     Renderer.draw(newNode, camera);
 
      let ret: t = {
         node: newNode,

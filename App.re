@@ -23,15 +23,16 @@ let init = app => {
   }
 
   let geometry = Revenge.Geometry.Cube.create();
-  let material = Revenge.Scene.Material.create();
+  let material = Revenge.Scene.Material.SolidColor.create();
 
-  let _ = Scene.draw(s, 
-                        <AmbientLight color={Colors.yellow} />
+  let _ = Scene.draw(s,
+                        <AmbientLight color={Colors.yellow}>
                         <Transform transform={Mat4.create()} >
                             <Mesh geometry material />
                         </Transform>
                         <Mesh geometry material />
-                     )
+                        </AmbientLight>,
+                     camera)
 
   /* Create a UI 'container' */
   /* let ui = UI.create(w); */

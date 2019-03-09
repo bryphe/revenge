@@ -1,6 +1,8 @@
 
 open Revery.Math;
 
+module Colors = Revery.Core.Colors;
+
 open Drawable;
 
 let defaultCamera = Mat4.create();
@@ -10,42 +12,50 @@ Mat4.lookAt(defaultCamera,
             Vec3.create(0., 1., 0.)
 );
 
-module RenderPass {
-
-    type t = {
-    | AmbientLight(Color.t)
-    }
-}
-
 module Mesh {
     type t = {
-        geometry: Geometry.t,
+        geometry: Revery.Geometry.Geometry.t,
         material: Material.t,
     }
 }
 
-let t = {
-    passes: list(RenderPass.t),
-    meshes: list(Mesh.t), 
-};
 
-let collect: (Drawable.t, Camera.t) => t = (drawable, camera) => {
+let collectMeshes: (Drawable.t) => list(Mesh.t) = (drawable) => {
 
+    let rec f: Drawable.t => list(Mesh.t) = (drawable) => {
+        open Mesh;
 
-    let rec f = (camera: Mat4.t=defaultCamera, drawable: Drawable.t) => {
-        switch (drawable.inner) {
-        | SceneRoot => ()
-        | Mesh(_) => prerr_endline("Mesh!")
-        | AmbientLight(c) => prerr_endline("AmbientLight")
-        | Transform(_) => prerr_endline("Transform")
-        }
+        let newItems: list(Mesh.t) = switch (drawable.inner) {
+        | Mesh(geometry, material) => [{geometry, material}]
+        | _ => []
+        };
 
+        List.fold_left((prev, curr) => {
+            let meshes = f(curr);
+
+            List.append(prev, meshes);
+            
+        }, newItems, drawable.children);
     };
 
+    /* }; */
 
-    f(defaultCamera, drawawble)
+    f(drawable);
 };
 
-let draw: (Drawable.t, Camera.t) => (drawable, camera) => {
-    let passes = collect(drawable, camera);
-}
+let draw: (Drawable.t, Camera.t) => unit = (drawable, _camera) => {
+    let meshes = collectMeshes(drawable);
+    /* let passes: list(RenderPass.t) = [RenderPass.AmbientColor(Colors.Yellow)]; */
+
+
+    let pass = RenderPass.AmbientLight(Colors.white);
+
+    let renderMesh = (pass: RenderPass.t, mesh: Mesh.t) => {
+       mesh.material.draw(pass, mesh.geometry);
+    }
+
+    List.iter(renderMesh(pass), meshes);
+
+
+    print_endline ("Meshes: " ++ string_of_int(List.length(meshes)));
+};
