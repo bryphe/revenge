@@ -2,10 +2,23 @@
 open Revery;
 open Revery.Math;
 /* open Revery.UI; */
+open Reglfw;
 
 open Revenge;
-/* open Revenge.Scene; */
+open Revenge.Scene;
 open Revenge.Scene.Primitives;
+
+
+let isNative =
+  switch (Sys.backend_type) {
+  | Native => true
+  | Bytecode => true
+  | _ => false
+  };
+
+
+let getExecutingDirectory = () =>
+  isNative ? Filename.dirname(Sys.argv[0]) ++ Filename.dir_sep : "";
 
 /* The 'main' function for our app */
 let init = app => {
@@ -35,6 +48,11 @@ let init = app => {
   let geometry = Revenge.Geometry.Cube.create();
   let material = Revenge.Scene.Material.SolidColor.create();
 
+  let imgPromise = Image.load(getExecutingDirectory() ++ "UVCheckerMap02-512.png");
+  let _ = Lwt.bind(imgPromise, (v) => {
+    
+
+      let _texture = Texture.ofImage(v);
   /* let _ = Scene.draw(s, */
   /*                       <AmbientLight color={Colors.yellow}> */
   /*                       <Transform transform={Mat4.create()} > */
@@ -83,6 +101,8 @@ let init = app => {
       ();
     },
   );
+  Lwt.return();
+  });
 };
 
 /* Let's get this party started! */
