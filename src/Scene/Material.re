@@ -5,7 +5,7 @@ open Revery.Core;
 /* open Revery.Shaders.Shader; */
 
 type t = {
-    draw: (RenderPass.t, Geometry.t) => unit,
+    draw: (RenderPass.t, Geometry.t, Mat4.t) => unit,
 };
 
 module CompiledShader = Revery.Shaders.CompiledShader;
@@ -13,7 +13,7 @@ module CompiledShader = Revery.Shaders.CompiledShader;
 module SolidColor = {
     let create: unit => t = () => {
 
-        let draw = (renderPass: RenderPass.t, geometry: Geometry.t) => {
+        let draw = (renderPass: RenderPass.t, geometry: Geometry.t, transform: Mat4.t) => {
 
 
             switch (renderPass) {
@@ -25,7 +25,7 @@ module SolidColor = {
                 CompiledShader.setUniformMatrix4fv(
                     shader,
                     "uWorld",
-                    Mat4.create()
+                    transform,
                 );
 
                 CompiledShader.setUniformMatrix4fv(

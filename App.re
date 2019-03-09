@@ -54,14 +54,23 @@ let init = app => {
 
   Window.setShouldRenderCallback(w, () => true);
 
+  let someTransform = Mat4.create(); 
+  Mat4.fromTranslation(someTransform, Vec3.create(0., 3., 0.));
+
   /* Set up our render function */
   Window.setRenderCallback(w, () => {
+
+      let time = Reglfw.Glfw.glfwGetTime();
+
+      let someTransform = Mat4.create(); 
+      Mat4.fromTranslation(someTransform, Vec3.create(0., sin(time) *. 3., 0.));
+
 
       /* Reglfw.Glfw.glClearColor(1.0, 0., 0., 0.); */
 
       let _ = Scene.draw(s,
                         <AmbientLight color={Colors.yellow}>
-                        <Transform transform={Mat4.create()} >
+                        <Transform transform={someTransform} >
                             <Mesh geometry material />
                         </Transform>
                         <Mesh geometry material />
